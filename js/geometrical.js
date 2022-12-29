@@ -38,7 +38,20 @@ const chrimg= document.createElement("img")
 const lPlayer = document.getElementById("lives-ch")
 const lEnm = document.getElementById("lives-enm")
 
+/* Clases */
+class Mokepon {
+    constructor (nombre,foto,vida) {
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+    }
+}
 
+let hipodoge = new Mokepon("Hipodoge","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true",lifeEnm)
+
+let capipepo = new Mokepon("Capipepo","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true",lifeEnm)
+
+let ratigueya = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",lifeEnm)
 
 /* Funciones */
 function startGame(){   /* Detectar mascota del jugador */
