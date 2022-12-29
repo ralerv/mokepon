@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometrical Wars</title>
+    <link rel="stylesheet" href="./styles.css">
+
+</head>
+<body>
+    <section class="all">        
+        <section id="pick-ch">      <!-- Escojer personaje -->
+            <h1>Mokepon!</h1>
+           <h2>Elige a tu mascota</h2>
+           <ul id="figures"> <!-- Figuras -->
+                <li class="chrs">
+                 <input type="radio" name="chrs" id="Triángulo">
+                 <label for="Triángulo">Hipodoge<img src="https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true" alt="Hipodoge"></label>
+                 
+                </li>   <!-- Fuego -->
+                <li class="chrs">
+                 <input type="radio" name="chrs" id="Cuadrado">
+                 <label for="Cuadrado">Capipepo<img src="https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true" alt="Capipepo"></label>
+                </li>   <!-- Tierra -->
+                <li class="chrs">
+                    <input type="radio" name="chrs" id="Círculo">
+                    <label for="Círculo">Ratigueya<img src="https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true" alt="Ratigueya"></label>
+                    
+                </li>   <!-- Agua -->
+            </ul>
+            <button class="buttons" id="button-pick-ch">Seleccionar mascota</button>
+        </section>
+    
+        <section id="info">     <!-- Ataque,vidas -->
+            <h1>Mokepon!</h1>
+            <h2>Elige tu ataque:</h2>
+            <section id="pick-at"> <!-- ataques -->
+                <button class="buttons" id="button-pick-fire">🔥 Fuego</button>
+                <button class="buttons" id="button-pick-earth">🌱 Tierra</button>
+                <button class="buttons" id="button-pick-water">💧 Agua</button>
+            </section>
+        
+        </section>
+
+        <section id="restart-section">
+            <span id="results"></span>
+            <button class="buttons" id="restart">Reiniciar</button>
+        </section>
+
+        <section id="gameplay">
+            <span id="superior">
+                <span id="game-Ch">
+                    <div class="pjs">
+                        <span id="pick-img"></span>
+                        <p><span id="lives-ch">3</span>♥️</p>
+                    </div>
+                    <span id="name-ch">Tu figura</span>
+                </span>
+    
+                <span></span>
+                
+                <span id="game-En">
+                    <div class="pjs">
+                        <span id="enm-img"></span>
+                        <p><span id="lives-enm">3</span>♥️</p>
+                    </div>
+                    <span id="name-enm">La figura</span>
+                </span>
+            </span>
+            
+            <span id="combate">
+                <span id="ch-atks"></span>
+                <span id="resultados"></span>
+                <span id="enm-atks"></span>
+            </span>
+            
+
+        </section>
+
+    </section>
+    <script src="./js/geometrical.js"></script>
+</body>
+</html>

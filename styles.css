@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');/* Forma de importar fuentes directamente a css */
+
+:root {         /* Estableciendo las variables */
+    --white: #FFFFFF;
+    --black: #000000;
+    --dark: #232830;
+    --strong-blue: #1746A2;
+    --light-blue: #5F9DF7;
+    --almost-white: #FFF7E9;
+    --regular-orange: #FF731D;
+    --mn: 16px;
+    --sm: 20px;
+    --md: 24px;
+    --lg: 48px;
+}
+
+* {
+    box-sizing: border-box;  /* Controlemos a las cajas xd */
+}
+
+img {                       /* ajustar imagenes a su contenedor */
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+body {
+    background: linear-gradient(70deg, var(--strong-blue), var(--light-blue));      /* fondo con gradiente */
+    height: 100vh;
+    width: 100vw;               /* SUPER IMPORTANTE ESPECFICAR HEIGHT Y WIDTH */
+    margin: 0;
+    padding: 0;
+    font-family: 'Silkscreen', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--almost-white);
+}
+
+.all {
+    box-shadow: 0px 0px 20px rgba(35, 40, 48, 0.5);
+    border: 8px solid var(--regular-orange);
+}
+
+.all h1 {
+    font-size: var(--lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto;
+}
+
+#pick-ch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: auto;
+    width: 600px;
+}
+
+#pick-ch h2{
+    font-size: var(--md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#figures {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;                   /* gap para dar espaciado entre elementos */
+    font-size: var(--sm);
+}
+
+.chrs input {
+    display: none;
+}
+
+.chrs label {
+    width: 160px;
+    padding: 8px 4px;
+    border: 3px solid var(--regular-orange);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: transform 0.2s, box-shadow 0.2s, color 0.2s, background-color 0.2s;       /* duración de la transición, se pone antes de que ocurra el efecto, no es necesario especificar valores de comienzo */
+}
+
+.chrs input:checked + label {                       /* Esto solo ocurrira cuando se dé clic al label */
+    background-color: var(--almost-white);          
+    color: var(--regular-orange);
+    transform: scale(1.1);              /* Se pone el transform especificando que tocar, ya se decidio su tiempo en el anterior */
+    box-shadow: 0px 0px 20px rgba(35, 40, 48, 0.33);    /* eje x, eje y, tamaño de sombra, color rgb y ultimo de transparencia */
+}
+
+.chrs label:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(35, 40, 48, 0.25);
+}
+
+
+.buttons {
+    margin: 8px auto;
+    font-size: var(--mn);
+    background-color: var(--regular-orange);
+    font-family: 'Silkscreen', cursive;
+    width: 160px;
+    border: none;                                       /* Reseteando los estilos al botón */
+    color: var(--almost-white);
+    margin-bottom: 16px;
+    box-shadow: 0px 0px 8px rgba(35, 40, 48, 0.33);
+    transition: box-shadow 0.2s;                        /* 1.1 Primero propiedades */
+}
+
+.buttons:hover {
+    box-shadow: 0px 0px 16px rgba(35, 40, 48, 0.75);    /* 1.2 Luego lo que va a pasar (?) */
+}
+
+#gameplay {
+    width: 480px;
+    display: grid;          /* ESTO SE MODIFICA EN EL JS */
+    grid-template-rows: auto auto;
+    justify-content: center;
+    justify-items: center;
+    padding: 16px;
+}
+
+#superior, #combate {
+    display: grid;
+    grid-template-columns: 140px 140px 140px;
+}
+
+#combate {
+    max-height: 136px;
+    overflow: auto;
+}
+
+#info, #restart-section {
+    box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+}
+
+#info, #game-Ch, #resultados, #game-En, #ch-atks, #enm-atks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ch-atks, #enm-atks, #resultados{
+    flex-direction: column-reverse;
+}
+
+#ch-atks p, #enm-atks p, #resultados p{
+    margin-bottom: 0px;
+    flex-direction: column-reverse;
+}
+
+#pick-at button{
+    width: 120px;
+}
+
+#resultados {
+    justify-content: end;
+}
+
+.pjs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pjs p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#restart-section {
+    display:flex;               /* ESTO SE MODIFICA EN EL JS */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width:360px) {
+    .all {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        box-shadow: none;
+    }
+    #pick-ch {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #figures {
+        flex-direction: column;
+    }
+
+    .chrs label {
+        width: 240px;
+        padding: 8px 4px;
+        border: 4px solid var(--regular-orange);
+        display: flex;
+        flex-direction: row;
+    }
+
+    #pick-at {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #info {
+        box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+    }
+
+    #gameplay {
+        width: 100vw;
+        grid-template-rows: auto auto;
+        padding: 24px 16px 0px 16px;
+    }
+
+    #superior, #combate {
+        grid-template-columns: 100px 100px 100px;
+    }
+
+    #combate {
+        max-height: 260px;
+    }
+
+    #restart-section {
+        box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+    }
+
+}
