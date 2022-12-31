@@ -12,9 +12,15 @@ let pj
 let personaje = ""
 let enemigo = ""
 let colortext =""
+let mokepones = []
+let mokeponOptions
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
 
 /* Traer elementos */
 const sectionAtks = document.getElementById("info")     
+const figures = document.getElementById("figures")
 const sectionRepeat = document.getElementById("restart-section")      
 const sectionGameplay = document.getElementById("gameplay")       
 const buttonPickCh = document.getElementById("button-pick-ch")
@@ -23,9 +29,6 @@ const sectionChs = document.getElementById("pick-ch")
 const btFire = document.getElementById("button-pick-fire")
 const btEarth = document.getElementById("button-pick-earth")
 const btWater = document.getElementById("button-pick-water")
-const inputTriangulo = document.getElementById("Triángulo")
-const inputCuadrado = document.getElementById("Cuadrado")
-const inputCírculo = document.getElementById("Círculo")
 const chrc = document.getElementById("name-ch")
 const chEn = document.getElementById("name-enm")
 const sectionRestart = document.getElementById("results")
@@ -44,6 +47,7 @@ class Mokepon {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques = []
     }
 }
 
@@ -53,8 +57,48 @@ let capipepo = new Mokepon("Capipepo","https://github.com/platzi/curso-programac
 
 let ratigueya = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",lifeEnm)
 
+hipodoge.ataques.push(
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🌱", id:"button-pick-earth"}
+)
+
+capipepo.ataques.push(
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🔥", id:"button-pick-fire"},
+)
+
+ratigueya.ataques.push(
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🌱", id:"button-pick-earth"}
+)
+
+mokepones.push(hipodoge,capipepo,ratigueya)
+
 /* Funciones */
 function startGame(){   /* Detectar mascota del jugador */
+    mokepones.forEach((mokepon) => {
+        mokeponOptions = ` 
+            <li class="chrs">
+                 <input type="radio" name="chrs" id=${mokepon.nombre}>
+                 <label for=${mokepon.nombre}>${mokepon.nombre}<img src=${mokepon.foto} alt=${mokepon.nombre}></label>
+            </li>
+        `
+        figures.innerHTML += mokeponOptions
+        inputHipodoge = document.getElementById("Hipodoge")
+        inputCapipepo = document.getElementById("Capipepo")
+        inputRatigueya = document.getElementById("Ratigueya")
+    })
+
+
     sectionAtks.style.display= "none"       /* Ocultar ataques */
     sectionRepeat.style.display= "none"      /* Ocultar boton de reinicio */
     sectionGameplay.style.display= "none"   /* Ocultar boton de reinicio */
@@ -63,10 +107,10 @@ function startGame(){   /* Detectar mascota del jugador */
 }
 
 function pickChPlayer() {   /* Detectar mascota del jugador */
-    if (inputTriangulo.checked){pj = 1; chrc.innerHTML="Hipodoge"; pickChEnemy()} /* La mascota del enemigo se escogerá, triangulo = hipodoge */
-    if (inputCuadrado.checked){pj = 2; chrc.innerHTML="Capipepo"; pickChEnemy()} /* cuadrado = capipepo */
-    if (inputCírculo.checked){pj = 3; chrc.innerHTML="Ratigueya"; pickChEnemy()} /* circulo = ratigueya */
-    if (!inputTriangulo.checked && !inputCuadrado.checked && !inputCírculo.checked ) {alert("ESCOGE UN PERSONAJE")}
+    if (inputHipodoge.checked){pj = 1; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
+    if (inputCapipepo.checked){pj = 2; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
+    if (inputRatigueya.checked){pj = 3; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
+    if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
 }
 
 function aleatorio(min,max){ /* Numero random con rangos */
