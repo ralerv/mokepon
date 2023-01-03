@@ -1,5 +1,5 @@
 /* Variables */
-let atkCh
+let ataqueJugador = []
 let atkEnm
 let atk
 let n
@@ -17,6 +17,11 @@ let mokeponOptions
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
+let btFire
+let btEarth
+let btWater
+let allAtksCh
+let botones = []
 
 /* Traer elementos */
 const sectionAtks = document.getElementById("info")     
@@ -26,9 +31,7 @@ const sectionGameplay = document.getElementById("gameplay")
 const buttonPickCh = document.getElementById("button-pick-ch")
 const reset = document.getElementById("restart")
 const sectionChs = document.getElementById("pick-ch")
-const btFire = document.getElementById("button-pick-fire")
-const btEarth = document.getElementById("button-pick-earth")
-const btWater = document.getElementById("button-pick-water")
+const sectionAts = document.getElementById("pick-at")
 const chrc = document.getElementById("name-ch")
 const chEn = document.getElementById("name-enm")
 const sectionRestart = document.getElementById("results")
@@ -107,11 +110,58 @@ function startGame(){   /* Detectar mascota del jugador */
 }
 
 function pickChPlayer() {   /* Detectar mascota del jugador */
-    if (inputHipodoge.checked){pj = 1; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
-    if (inputCapipepo.checked){pj = 2; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
-    if (inputRatigueya.checked){pj = 3; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
+    if (inputHipodoge.checked){pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; } /* La mascota del enemigo se escogerá */
+    if (inputCapipepo.checked){pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id;}
+    if (inputRatigueya.checked){pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id;}
     if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
+    extraerAtaques(pj)
 }
+
+function extraerAtaques(mascotaJugador) {
+    let ataques
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            ataques = mokepones[i].ataques
+        }
+    }
+    mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques){
+    ataques.forEach((ataque) => {
+        allAtksCh = `
+            <button id=${ataque.id} class="buttons BAtaque">${ataque.nombre}</button>
+        `
+        sectionAts.innerHTML += allAtksCh
+    })
+    btFire = document.getElementById("button-pick-fire")
+    btEarth = document.getElementById("button-pick-earth")
+    btWater = document.getElementById("button-pick-water")
+    botones = document.querySelectorAll('.BAtaque')
+    console.log(botones)
+    secuenciaAtaque()
+}
+
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === '🔥') {
+                ataqueJugador.push('FUEGO')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'   
+            } else if (e.target.textContent === '💧') {
+                ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+            } else {
+                ataqueJugador.push('TIERRA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+            }
+        })
+    })
+    pickChEnemy()
+    }
 
 function aleatorio(min,max){ /* Numero random con rangos */
     return Math.floor(Math.random()*(max-min+1)+min)
@@ -122,16 +172,10 @@ function pickChEnemy (){    /* El enemigo escoge mascota */
     sectionChs.style.display= "none"            /* Ocultar mascotas */
     sectionAtks.style.display= "flex"           /* Mostrar ataques */
     sectionGameplay.style.display= "grid"       /* mostrar gameplay */
-    let r = aleatorio(1,3)
-    if (r==1){chEn.innerHTML="Hipodoge"}
-    if (r==2){chEn.innerHTML="Capipepo"}
-    if (r==3){chEn.innerHTML="Ratigueya"}
-    
-    addPjs(pj,r)
-
-    btFire.addEventListener("click", atkFire)
-    btEarth.addEventListener("click", atkEarth)
-    btWater.addEventListener("click", atkWater)
+    let r = aleatorio(0,mokepones.length-1)
+    chEn.innerHTML = mokepones[r].nombre
+    addPjs(1,r)
+    console.log(r,mokepones)
 }
 
 
@@ -145,9 +189,9 @@ function addPjs(a,b){
     }
 
     switch (b) {
-        case 1: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true"; break;
-        case 2: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true"; break;
-        case 3: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true"; break;
+        case 0: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true"; break;
+        case 2: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true"; break;
+        case 1: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true"; break;
         default:"undefined"
             break;
     }
@@ -158,9 +202,9 @@ function addPjs(a,b){
     enmimg.appendChild(enimg)
 }
 
-function atkFire(){atkCh="Fuego"; atkEn(); n=1}      /* Detectar ataque jugador */
-function atkEarth(){atkCh="Tierra"; atkEn(); n=2}
-function atkWater(){atkCh="Agua"; atkEn(); n=3}
+function atkFire(){ataqueJugador="Fuego"; atkEn(); n=1}      /* Detectar ataque jugador */
+function atkEarth(){ataqueJugador="Tierra"; atkEn(); n=2}
+function atkWater(){ataqueJugador="Agua"; atkEn(); n=3}
 
 function atkEn()                                /* El enemigo ataca */
     {
@@ -192,7 +236,7 @@ function updateLifes() {
 
 function createMessage(){                     /* Crear mensaje (p) de ataque en html */
     let parrafoChrc = document.createElement("p")
-    parrafoChrc.innerHTML = atkCh;
+    parrafoChrc.innerHTML = ataqueJugador;
     let parrafoEnm = document.createElement("p")
     parrafoEnm.innerHTML = atkEnm;
     let parrafoResultado = document.createElement("p")
