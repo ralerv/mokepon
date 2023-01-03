@@ -110,9 +110,9 @@ function startGame(){   /* Detectar mascota del jugador */
 }
 
 function pickChPlayer() {   /* Detectar mascota del jugador */
-    if (inputHipodoge.checked){pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; } /* La mascota del enemigo se escogerá */
-    if (inputCapipepo.checked){pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id;}
-    if (inputRatigueya.checked){pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id;}
+    if (inputHipodoge.checked){pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
+    if (inputCapipepo.checked){pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
+    if (inputRatigueya.checked){pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
     if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
     extraerAtaques(pj)
 }
@@ -160,7 +160,7 @@ function secuenciaAtaque() {
             }
         })
     })
-    pickChEnemy()
+    atkEn()
     }
 
 function aleatorio(min,max){ /* Numero random con rangos */
@@ -201,10 +201,6 @@ function addPjs(a,b){
     pickimg.appendChild(chrimg)
     enmimg.appendChild(enimg)
 }
-
-function atkFire(){ataqueJugador="Fuego"; atkEn(); n=1}      /* Detectar ataque jugador */
-function atkEarth(){ataqueJugador="Tierra"; atkEn(); n=2}
-function atkWater(){ataqueJugador="Agua"; atkEn(); n=3}
 
 function atkEn()                                /* El enemigo ataca */
     {
