@@ -206,35 +206,31 @@ function indexAmbosOponente(jugador, enemigo) {
 }
 
 function combat(){
-    for (let index = 0; index < ataqueJugador.length; index++) {
-        if (ataqueJugador[index] === atkEnm[index]) {
-            indexAmbosOponente(index, index)
+    
+        if (ataqueJugador[a] === atkEnm[a]) {
             resultadoCombate="Empate"
             colortext="black"
         }
-        else if (ataqueJugador[index] === "FUEGO" && atkEnm[index] === "TIERRA"){
+        else if (ataqueJugador[a] === "FUEGO" && atkEnm[a] === "TIERRA"){
             resultadoCombate="Ganaste";
-            indexAmbosOponente(index, index);
-            winsPlayer++;
+            winsPlayer=winsPlayer+1;
             colortext="#00ff00"
         }
 
-        else if (ataqueJugador[index] === "AGUA" && atkEnm[index] === "FUEGO"){
+        else if (ataqueJugador[a] === "AGUA" && atkEnm[a] === "FUEGO"){
             resultadoCombate="Ganaste";
-            indexAmbosOponente(index, index);
-            winsPlayer++;
+            winsPlayer=winsPlayer+1;
             colortext="#00ff00"
         }
 
-        else if (ataqueJugador[index] === "TIERRA" && atkEnm[index] === "AGUA"){
+        else if (ataqueJugador[a] === "TIERRA" && atkEnm[a] === "AGUA"){
             resultadoCombate="Ganaste";
-            indexAmbosOponente(index, index);
-            winsPlayer++;
+            winsPlayer=winsPlayer+1;
             colortext="#00ff00"
         }
 
-        else {resultadoCombate="Perdiste"; winsEnemie++; colortext="red"}
-    }
+        else {resultadoCombate="Perdiste"; winsEnemie=winsEnemie+1; colortext="red"}
+
     createMessage()
     updateLifes()
 }
