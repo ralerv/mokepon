@@ -1,6 +1,7 @@
 /* Variables */
 let ataqueJugador = []
 let atkEnm = []
+let tAtk = []
 let atk
 let n
 let resultadoCombate
@@ -152,15 +153,18 @@ function secuenciaAtaque() {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push('FUEGO')
                 console.log(ataqueJugador)
-                boton.style.background = '#112f58'   
+                boton.style.background = '#112f58'
+                boton.disabled=true 
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push('AGUA')
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
+                boton.disabled=true 
             } else {
                 ataqueJugador.push('TIERRA')
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
+                boton.disabled=true 
             }
             atkEn()
         })
@@ -190,6 +194,7 @@ function addPjs(z,t){
     pickimg.appendChild(chrimg)
     enmimg.appendChild(enimg)
 }
+
 
 function atkEn()                                /* El enemigo ataca */
     {
