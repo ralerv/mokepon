@@ -1,13 +1,11 @@
 /* Variables */
 let ataqueJugador = []
-let atkEnm
+let atkEnm = []
 let atk
 let n
 let resultadoCombate
-let loses = 0
-let wins = 0
-let lifeEnm = 3
-let lifePlayer = 3
+let winsEnemie = 0
+let winsPlayer = 0
 let pj
 let personaje = ""
 let enemigo = ""
@@ -22,6 +20,11 @@ let btEarth
 let btWater
 let allAtksCh
 let botones = []
+let atksEnMokepon = []
+let indexAtaqueJugador
+let indexAtaqueEnemigo
+let a = 0
+let fotousuario
 
 /* Traer elementos */
 const sectionAtks = document.getElementById("info")     
@@ -54,11 +57,11 @@ class Mokepon {
     }
 }
 
-let hipodoge = new Mokepon("Hipodoge","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true",lifeEnm)
+let hipodoge = new Mokepon("Hipodoge","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true",5)
 
-let capipepo = new Mokepon("Capipepo","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true",lifeEnm)
+let capipepo = new Mokepon("Capipepo","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true",5)
 
-let ratigueya = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",lifeEnm)
+let ratigueya = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",5)
 
 hipodoge.ataques.push(
     { nombre: "💧", id:"button-pick-water"},
@@ -110,11 +113,12 @@ function startGame(){   /* Detectar mascota del jugador */
 }
 
 function pickChPlayer() {   /* Detectar mascota del jugador */
-    if (inputHipodoge.checked){pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
-    if (inputCapipepo.checked){pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
-    if (inputRatigueya.checked){pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
+    if (inputHipodoge.checked){fotousuario = hipodoge.foto; pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
+    if (inputCapipepo.checked){fotousuario = capipepo.foto; pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
+    if (inputRatigueya.checked){fotousuario = ratigueya.foto; pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
     if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
     extraerAtaques(pj)
+    console.log(pj)
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -145,11 +149,11 @@ function mostrarAtaques(ataques){
 function secuenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener('click', (e) => {
-            if (e.target.textContent === '🔥') {
+            if (e.target.textContent === "🔥") {
                 ataqueJugador.push('FUEGO')
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'   
-            } else if (e.target.textContent === '💧') {
+            } else if (e.target.textContent === "💧") {
                 ataqueJugador.push('AGUA')
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
@@ -158,9 +162,9 @@ function secuenciaAtaque() {
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
             }
+            atkEn()
         })
     })
-    atkEn()
     }
 
 function aleatorio(min,max){ /* Numero random con rangos */
@@ -174,73 +178,100 @@ function pickChEnemy (){    /* El enemigo escoge mascota */
     sectionGameplay.style.display= "grid"       /* mostrar gameplay */
     let r = aleatorio(0,mokepones.length-1)
     chEn.innerHTML = mokepones[r].nombre
-    addPjs(1,r)
+    atksEnMokepon = mokepones[r].ataques
+    addPjs(fotousuario,mokepones[r].foto)
     console.log(r,mokepones)
 }
 
-
-function addPjs(a,b){
-    switch (a) {
-        case 1: a = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true"; break;
-        case 2: a = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true"; break;
-        case 3: a = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true"; break;
-        default:"undefined"
-            break;
-    }
-
-    switch (b) {
-        case 0: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true"; break;
-        case 2: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true"; break;
-        case 1: b = "https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true"; break;
-        default:"undefined"
-            break;
-    }
-    chrimg.src = a;
+function addPjs(z,t){
+    chrimg.src = z;
     let enimg= document.createElement("img")
-    enimg.src = b;
+    enimg.src = t;
     pickimg.appendChild(chrimg)
     enmimg.appendChild(enimg)
 }
 
 function atkEn()                                /* El enemigo ataca */
     {
-        atk = aleatorio(1,3)
-        switch (atk) {
-            case 1: atkEnm="Fuego"; break;
-            case 2: atkEnm="Tierra"; break;
-            case 3: atkEnm="Agua"; break;
-            default: atkEnm="none"; break;
-        }
+        atk = aleatorio(0,atksEnMokepon.length - 1)
+        if (atksEnMokepon[atk].nombre === "🔥") {atkEnm.push("FUEGO")}
+        else if (atksEnMokepon[atk].nombre === "💧") {atkEnm.push("AGUA")}
+        else {atkEnm.push("TIERRA")}
         combat()
-        createMessage()
-        updateLifes()
     }
 
+function indexAmbosOponente(jugador, enemigo) {
+    indexAtaqueJugador = ataqueJugador[jugador]
+    indexAtaqueEnemigo = atkEnm[enemigo]
+}
+
 function combat(){
-    if (n==atk) {resultadoCombate="Empate"; colortext="black"}
-    else if (n == 1 && atk==3) {resultadoCombate="Ganaste"; lifeEnm--; colortext="#00ff00"}
-    else if (n == 2 && atk==1) {resultadoCombate="Ganaste"; lifeEnm--; colortext="#00ff00"}
-    else if (n == 3 && atk==2) {resultadoCombate="Ganaste"; lifeEnm--; colortext="#00ff00"}
-    else {resultadoCombate="Perdiste"; lifePlayer--; colortext="red"}
+    for (let index = 0; index < ataqueJugador.length; index++) {
+        if (ataqueJugador[index] === atkEnm[index]) {
+            indexAmbosOponente(index, index)
+            resultadoCombate="Empate"
+            colortext="black"
+        }
+        else if (ataqueJugador[index] === "FUEGO" && atkEnm[index] === "TIERRA"){
+            resultadoCombate="Ganaste";
+            indexAmbosOponente(index, index);
+            winsPlayer++;
+            colortext="#00ff00"
+        }
+
+        else if (ataqueJugador[index] === "AGUA" && atkEnm[index] === "FUEGO"){
+            resultadoCombate="Ganaste";
+            indexAmbosOponente(index, index);
+            winsPlayer++;
+            colortext="#00ff00"
+        }
+
+        else if (ataqueJugador[index] === "TIERRA" && atkEnm[index] === "AGUA"){
+            resultadoCombate="Ganaste";
+            indexAmbosOponente(index, index);
+            winsPlayer++;
+            colortext="#00ff00"
+        }
+
+        else {resultadoCombate="Perdiste"; winsEnemie++; colortext="red"}
+    }
+    createMessage()
+    updateLifes()
 }
 
 function updateLifes() {
-    lPlayer.innerHTML=lifePlayer
-    lEnm.innerHTML=lifeEnm
-    if (lifeEnm == 0 || lifePlayer == 0) {createMessageFinal(); blockAtkButtons()}           /* RESULTADO TOTAL */
+    lPlayer.innerHTML=winsPlayer
+    lEnm.innerHTML=winsEnemie
+    if (a == 5) {
+        if (winsPlayer > winsEnemie) {
+            resultadoCombate="Ganaste";
+            colortext="#00ff00"
+        }
+        else if (winsPlayer < winsEnemie) {
+            resultadoCombate="Perdiste";
+            colortext="red"
+        }
+        else if (winsPlayer == winsEnemie) {
+            resultadoCombate="Empate wtf";
+            colortext="black"
+        }
+        createMessageFinal();
+        blockAtkButtons()
+    }           /* RESULTADO TOTAL */
 }
 
 function createMessage(){                     /* Crear mensaje (p) de ataque en html */
     let parrafoChrc = document.createElement("p")
-    parrafoChrc.innerHTML = ataqueJugador;
+    parrafoChrc.innerHTML = ataqueJugador[a];
     let parrafoEnm = document.createElement("p")
-    parrafoEnm.innerHTML = atkEnm;
+    parrafoEnm.innerHTML = atkEnm[a];
     let parrafoResultado = document.createElement("p")
     parrafoResultado.innerHTML = resultadoCombate;
     parrafoResultado.style.color = colortext;
     spanChAtks.appendChild(parrafoChrc)
     spanEnAtks.appendChild(parrafoEnm)
     resultado.appendChild(parrafoResultado)
+    a++
 }
 
 function blockAtkButtons(){
