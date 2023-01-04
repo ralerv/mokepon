@@ -200,11 +200,6 @@ function atkEn()                                /* El enemigo ataca */
         combat()
     }
 
-function indexAmbosOponente(jugador, enemigo) {
-    indexAtaqueJugador = ataqueJugador[jugador]
-    indexAtaqueEnemigo = atkEnm[enemigo]
-}
-
 function combat(){
     
         if (ataqueJugador[a] === atkEnm[a]) {
@@ -213,23 +208,23 @@ function combat(){
         }
         else if (ataqueJugador[a] === "FUEGO" && atkEnm[a] === "TIERRA"){
             resultadoCombate="Ganaste";
-            winsPlayer=winsPlayer+1;
+            winsPlayer++;
             colortext="#00ff00"
         }
 
         else if (ataqueJugador[a] === "AGUA" && atkEnm[a] === "FUEGO"){
             resultadoCombate="Ganaste";
-            winsPlayer=winsPlayer+1;
+            winsPlayer++;
             colortext="#00ff00"
         }
 
         else if (ataqueJugador[a] === "TIERRA" && atkEnm[a] === "AGUA"){
             resultadoCombate="Ganaste";
-            winsPlayer=winsPlayer+1;
+            winsPlayer++;
             colortext="#00ff00"
         }
 
-        else {resultadoCombate="Perdiste"; winsEnemie=winsEnemie+1; colortext="red"}
+        else {resultadoCombate="Perdiste"; winsEnemie++; colortext="red"}
 
     createMessage()
     updateLifes()
