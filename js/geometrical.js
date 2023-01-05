@@ -153,23 +153,26 @@ function secuenciaAtaque() {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push('FUEGO')
                 console.log(ataqueJugador)
-                boton.style.background = '#112f58'
-                boton.disabled=true 
+                disableSomeCSSFeatures(boton)
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push('AGUA')
                 console.log(ataqueJugador)
-                boton.style.background = '#112f58'
-                boton.disabled=true 
+                disableSomeCSSFeatures(boton)
             } else {
                 ataqueJugador.push('TIERRA')
                 console.log(ataqueJugador)
-                boton.style.background = '#112f58'
-                boton.disabled=true 
+                disableSomeCSSFeatures(boton)
             }
             atkEn()
         })
     })
     }
+
+function disableSomeCSSFeatures(boton){
+    boton.style.background = '#112f58'
+    boton.style.cursor="not-allowed"
+    boton.style.boxShadow="none"
+}
 
 function aleatorio(min,max){ /* Numero random con rangos */
     return Math.floor(Math.random()*(max-min+1)+min)

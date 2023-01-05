@@ -164,7 +164,10 @@ body {
 }
 
 #pick-at button{
-    width: 120px;
+    width: auto;
+    height: 50px;
+    min-width: 50px;
+    background-color: var(--almost-white);
 }
 
 #resultados {
@@ -216,8 +219,14 @@ body {
     }
 
     #pick-at {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        width: 92%;
+        grid-template-columns: 50% 50%;
+        place-items: center;
+    }
+
+    #pick-at button{
+        width: 92%;
     }
 
     #info {
