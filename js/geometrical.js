@@ -30,6 +30,8 @@ let fotousuario
 /* Traer elementos */
 const sectionAtks = document.getElementById("info")     
 const figures = document.getElementById("figures")
+const sectionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
 const sectionRepeat = document.getElementById("restart-section")      
 const sectionGameplay = document.getElementById("gameplay")       
 const buttonPickCh = document.getElementById("button-pick-ch")
@@ -93,6 +95,7 @@ mokepones.push(hipodoge,capipepo,ratigueya)
 /* Funciones */
 function startGame(){   /* Detectar mascota del jugador */
     mokepones.forEach((mokepon) => {
+        sectionVerMapa.style.display = "none"
         mokeponOptions = ` 
             <li class="chrs">
                  <input type="radio" name="chrs" id=${mokepon.nombre}>
@@ -179,10 +182,11 @@ function aleatorio(min,max){ /* Numero random con rangos */
 }
 
 function pickChEnemy (){    /* El enemigo escoge mascota */
+    sectionVerMapa.style.display = "flex"
     buttonPickCh.disabled=true;                   /* El jugador no cambia de mascota */
     sectionChs.style.display= "none"            /* Ocultar mascotas */
-    sectionAtks.style.display= "flex"           /* Mostrar ataques */
-    sectionGameplay.style.display= "grid"       /* mostrar gameplay */
+    //sectionAtks.style.display= "flex"           /* Mostrar ataques */
+    //sectionGameplay.style.display= "grid"       /* mostrar gameplay */
     let r = aleatorio(0,mokepones.length-1)
     chEn.innerHTML = mokepones[r].nombre
     atksEnMokepon = mokepones[r].ataques
