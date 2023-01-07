@@ -1,3 +1,26 @@
+/* Traer elementos */
+const sectionAtks = document.getElementById("info")     
+const figures = document.getElementById("figures")
+const sectionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+const sectionRepeat = document.getElementById("restart-section")      
+const sectionGameplay = document.getElementById("gameplay")       
+const buttonPickCh = document.getElementById("button-pick-ch")
+const reset = document.getElementById("restart")
+const sectionChs = document.getElementById("pick-ch")
+const sectionAts = document.getElementById("pick-at")
+const chrc = document.getElementById("name-ch")
+const chEn = document.getElementById("name-enm")
+const sectionRestart = document.getElementById("results")
+const spanChAtks = document.getElementById("ch-atks")
+const spanEnAtks = document.getElementById("enm-atks")
+const resultado = document.getElementById("resultados")
+const pickimg = document.getElementById("pick-img")
+const enmimg = document.getElementById("enm-img")
+const chrimg= document.createElement("img")
+const lPlayer = document.getElementById("lives-ch")
+const lEnm = document.getElementById("lives-enm")
+
 /* Variables */
 let ataqueJugador = []
 let atkEnm = []
@@ -26,29 +49,7 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let a = 0
 let fotousuario
-
-/* Traer elementos */
-const sectionAtks = document.getElementById("info")     
-const figures = document.getElementById("figures")
-const sectionVerMapa = document.getElementById("ver-mapa")
-const mapa = document.getElementById("mapa")
-const sectionRepeat = document.getElementById("restart-section")      
-const sectionGameplay = document.getElementById("gameplay")       
-const buttonPickCh = document.getElementById("button-pick-ch")
-const reset = document.getElementById("restart")
-const sectionChs = document.getElementById("pick-ch")
-const sectionAts = document.getElementById("pick-at")
-const chrc = document.getElementById("name-ch")
-const chEn = document.getElementById("name-enm")
-const sectionRestart = document.getElementById("results")
-const spanChAtks = document.getElementById("ch-atks")
-const spanEnAtks = document.getElementById("enm-atks")
-const resultado = document.getElementById("resultados")
-const pickimg = document.getElementById("pick-img")
-const enmimg = document.getElementById("enm-img")
-const chrimg= document.createElement("img")
-const lPlayer = document.getElementById("lives-ch")
-const lEnm = document.getElementById("lives-enm")
+let lienzo = mapa.getContext("2d")
 
 /* Clases */
 class Mokepon {
@@ -183,6 +184,9 @@ function aleatorio(min,max){ /* Numero random con rangos */
 
 function pickChEnemy (){    /* El enemigo escoge mascota */
     sectionVerMapa.style.display = "flex"
+    let imgCapipepo = new Image()
+    imgCapipepo.src = capipepo.foto
+    lienzo.drawImage(imgCapipepo,20,40,100,100)
     buttonPickCh.disabled=true;                   /* El jugador no cambia de mascota */
     sectionChs.style.display= "none"            /* Ocultar mascotas */
     //sectionAtks.style.display= "flex"           /* Mostrar ataques */
@@ -259,7 +263,6 @@ function updateLifes() {
             colortext="black"
         }
         createMessageFinal();
-        blockAtkButtons()
     }           /* RESULTADO TOTAL */
 }
 
@@ -275,12 +278,6 @@ function createMessage(){                     /* Crear mensaje (p) de ataque en 
     spanEnAtks.appendChild(parrafoEnm)
     resultado.appendChild(parrafoResultado)
     a++
-}
-
-function blockAtkButtons(){
-    btFire.disabled=true
-    btEarth.disabled=true
-    btWater.disabled=true
 }
     
 function createMessageFinal(){                   /* Crear mensaje final (p) de ataque en html */
