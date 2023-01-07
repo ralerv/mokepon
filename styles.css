@@ -194,6 +194,16 @@ body {
     justify-content: center;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa {
+    border: 2px solid white;
+}
+
 @media (max-width:360px) {
     .all {
         width: 100vw;
