@@ -50,6 +50,10 @@ let indexAtaqueEnemigo
 let a = 0
 let fotousuario
 let lienzo = mapa.getContext("2d")
+let intervalo
+let miMascota
+let mapaBackground = new Image()
+mapaBackground.src="https://raw.githubusercontent.com/platzi/curso-programacion-basica/64-imgs-personajes-fondo/programar/mokepon/assets/mokemap.png"
 
 /* Clases */
 class Mokepon {
@@ -58,6 +62,14 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -123,7 +135,24 @@ function pickChPlayer() {   /* Detectar mascota del jugador */
     if (inputRatigueya.checked){fotousuario = ratigueya.foto; pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
     if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
     extraerAtaques(pj)
-    console.log(pj)
+    iniciarMapa()
+    miMascota = obtenerMascota(pj)
+    }
+
+function obtenerMascota(mascotaJugador) {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            return mokepones[i]
+        }
+    }
+}
+
+function iniciarMapa(){
+    mapa.width=320
+    mapa.height=240
+    intervalo = setInterval(pintarCanvas,50)
+    window.addEventListener("keydown", pressKeyboard)
+    window.addEventListener("keyup",detenerMovimiento)
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -135,6 +164,8 @@ function extraerAtaques(mascotaJugador) {
     }
     mostrarAtaques(ataques)
 }
+
+
 
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) => {
@@ -184,9 +215,6 @@ function aleatorio(min,max){ /* Numero random con rangos */
 
 function pickChEnemy (){    /* El enemigo escoge mascota */
     sectionVerMapa.style.display = "flex"
-    let imgCapipepo = new Image()
-    imgCapipepo.src = capipepo.foto
-    lienzo.drawImage(imgCapipepo,20,40,100,100)
     buttonPickCh.disabled=true;                   /* El jugador no cambia de mascota */
     sectionChs.style.display= "none"            /* Ocultar mascotas */
     //sectionAtks.style.display= "flex"           /* Mostrar ataques */
@@ -196,6 +224,47 @@ function pickChEnemy (){    /* El enemigo escoge mascota */
     atksEnMokepon = mokepones[r].ataques
     addPjs(fotousuario,mokepones[r].foto)
     console.log(r,mokepones)
+}
+
+function pressKeyboard(event){
+    switch (event.key) {
+        case "ArrowUp": moverArriba(); break;
+        case "ArrowDown": moverAbajo(); break;
+        case "ArrowLeft": moverIzquierda(); break;
+        case "ArrowRight": moverDerecha(); break;
+        default:
+            break;
+    }
+}
+
+function pintarCanvas(){
+
+    miMascota.x = miMascota.x + miMascota.velocidadX
+    miMascota.y = miMascota.y + miMascota.velocidadY
+    lienzo.clearRect(0,0,mapa.width,mapa.height)
+    lienzo.drawImage(mapaBackground,0,0,mapa.width,mapa.height)
+    lienzo.drawImage(miMascota.mapaFoto,miMascota.x,miMascota.y,miMascota.ancho,miMascota.alto)
+}
+
+function moverDerecha(){
+    miMascota.velocidadX = 5
+}
+
+function moverIzquierda(){
+    miMascota.velocidadX = - 5
+}
+
+function moverAbajo(){
+    miMascota.velocidadY = 5
+}
+
+function moverArriba(){
+    miMascota.velocidadY = - 5
+}
+
+function detenerMovimiento(){
+    miMascota.velocidadX = 0
+    miMascota.velocidadY = 0
 }
 
 function addPjs(z,t){
