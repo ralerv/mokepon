@@ -115,6 +115,30 @@ ratigueya.ataques.push(
     { nombre: "🌱", id:"button-pick-earth"}
 )
 
+hipodogeEnemigo.ataques.push(
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🌱", id:"button-pick-earth"}
+)
+
+capipepoEnemigo.ataques.push(
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "🌱", id:"button-pick-earth"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🔥", id:"button-pick-fire"},
+)
+
+ratigueyaEnemigo.ataques.push(
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "🔥", id:"button-pick-fire"},
+    { nombre: "💧", id:"button-pick-water"},
+    { nombre: "🌱", id:"button-pick-earth"}
+)
+
 mokepones.push(hipodoge,capipepo,ratigueya)
 
 /* Funciones */
@@ -177,8 +201,6 @@ function extraerAtaques(mascotaJugador) {
     mostrarAtaques(ataques)
 }
 
-
-
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) => {
         allAtksCh = `
@@ -225,17 +247,16 @@ function aleatorio(min,max){ /* Numero random con rangos */
     return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-function pickChEnemy (){    /* El enemigo escoge mascota */
+function pickChEnemy(){    /* El enemigo escoge mascota */
     sectionVerMapa.style.display = "flex"
     buttonPickCh.disabled=true;                   /* El jugador no cambia de mascota */
     sectionChs.style.display= "none"            /* Ocultar mascotas */
-    //sectionAtks.style.display= "flex"           /* Mostrar ataques */
-    //sectionGameplay.style.display= "grid"       /* mostrar gameplay */
-    let r = aleatorio(0,mokepones.length-1)
-    chEn.innerHTML = mokepones[r].nombre
-    atksEnMokepon = mokepones[r].ataques
-    addPjs(fotousuario,mokepones[r].foto)
-    console.log(r,mokepones)
+    
+}
+function asignarEnemigo(chrcEnemigo){
+    chEn.innerHTML = chrcEnemigo.nombre
+    atksEnMokepon = chrcEnemigo.ataques
+    addPjs(fotousuario,chrcEnemigo.foto)
 }
 
 function pressKeyboard(event){
@@ -250,7 +271,6 @@ function pressKeyboard(event){
 }
 
 function pintarCanvas(){
-
     miMascota.x = miMascota.x + miMascota.velocidadX
     miMascota.y = miMascota.y + miMascota.velocidadY
     lienzo.clearRect(0,0,mapa.width,mapa.height)
@@ -259,6 +279,11 @@ function pintarCanvas(){
     hipodogeEnemigo.pintarMokepon()
     capipepoEnemigo.pintarMokepon()
     ratigueyaEnemigo.pintarMokepon()
+    if (miMascota.velocidadX !==0 || miMascota.velocidadY !==0) {
+        colisiones(hipodogeEnemigo)
+        colisiones(capipepoEnemigo)
+        colisiones(ratigueyaEnemigo)
+    }
 }
 
 function moverDerecha(){
@@ -280,6 +305,32 @@ function moverArriba(){
 function detenerMovimiento(){
     miMascota.velocidadX = 0
     miMascota.velocidadY = 0
+}
+
+function colisiones(enemigo){
+    let arribaEnemigo = enemigo.y
+    let abajoEnemigo = enemigo.y + enemigo.alto
+    let izquierdaEnemigo = enemigo.x
+    let derechaEnemigo = enemigo.x + enemigo.ancho
+
+    let arribaMascota = miMascota.y
+    let abajoMascota = miMascota.y + miMascota.alto
+    let izquierdaMascota = miMascota.x
+    let derechaMascota = miMascota.x + miMascota.ancho
+    
+    if (
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ){  return  }
+    detenerMovimiento()
+    clearInterval(intervalo)
+    console.log("colision xd")
+    sectionVerMapa.style.display = "none"
+    sectionAtks.style.display= "flex"           /* Mostrar ataques */
+    sectionGameplay.style.display= "grid"       /* mostrar gameplay */
+    asignarEnemigo(enemigo)
 }
 
 function addPjs(z,t){
