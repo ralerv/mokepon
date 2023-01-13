@@ -200,8 +200,20 @@ body {
     justify-content: center;
 }
 
-#mapa {
-    border: 2px solid white;
+#ver-mapa h2{
+    margin: 20px;
+}
+
+#mapa, #arrow-buttons button{
+    box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+}
+
+#arrow-buttons {
+    margin: 20px 0;
+}
+
+#arrow-buttons button{
+    box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
 }
 
 @media (max-width:360px) {
@@ -241,6 +253,10 @@ body {
 
     #info {
         box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+    }
+
+    #ver-mapa {
+        height: 100%;
     }
 
     #gameplay {
