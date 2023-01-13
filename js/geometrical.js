@@ -20,6 +20,7 @@ const enmimg = document.getElementById("enm-img")
 const chrimg= document.createElement("img")
 const lPlayer = document.getElementById("lives-ch")
 const lEnm = document.getElementById("lives-enm")
+const anchoMaximoMapa = 350
 
 /* Variables */
 let ataqueJugador = []
@@ -55,6 +56,14 @@ let miMascota
 let mapaBackground = new Image()
 mapaBackground.src="https://raw.githubusercontent.com/platzi/curso-programacion-basica/64-imgs-personajes-fondo/programar/mokepon/assets/mokemap.png"
 
+let anchoMapa = window.innerWidth - 20
+if (anchoMapa > anchoMaximoMapa) {anchoMapa = anchoMaximoMapa - 20}
+let alturaDeseada = anchoMapa * 600 / 800
+
+mapa.width = anchoMapa
+mapa.height = alturaDeseada
+
+
 /* Clases */
 class Mokepon {
     constructor (nombre,foto,vida, fotoMapa, x = 10 , y = 10) {
@@ -62,10 +71,10 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 40
         this.alto = 40
+        this.x = aleatorio(0,mapa.width-this.ancho)
+        this.y = aleatorio(0,mapa.height-this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -85,11 +94,11 @@ let ratigueya = new Mokepon ("Ratigueya","https://github.com/platzi/curso-progra
 
 
 
-let hipodogeEnemigo = new Mokepon("Hipodoge","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/hipodoge.png", 80 ,120)
+let hipodogeEnemigo = new Mokepon("Hipodoge","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_hipodoge_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/hipodoge.png")
 
-let capipepoEnemigo = new Mokepon("Capipepo","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/capipepo.png",150,95)
+let capipepoEnemigo = new Mokepon("Capipepo","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_capipepo_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/capipepo.png")
 
-let ratigueyaEnemigo = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/ratigueya.png",200,190)
+let ratigueyaEnemigo = new Mokepon ("Ratigueya","https://github.com/platzi/curso-programacion-basica/blob/35-assets-mokepones/programar/mokepon/assets/mokepons_mokepon_ratigueya_attack.png?raw=true",5,"https://raw.githubusercontent.com/platzi/curso-programacion-basica/65-clases-methods/programar/mokepon/assets/ratigueya.png")
 
 hipodoge.ataques.push(
     { nombre: "💧", id:"button-pick-water"},
@@ -184,8 +193,6 @@ function obtenerMascota(mascotaJugador) {
 }
 
 function iniciarMapa(){
-    mapa.width=320
-    mapa.height=240
     intervalo = setInterval(pintarCanvas,50)
     window.addEventListener("keydown", pressKeyboard)
     window.addEventListener("keyup",detenerMovimiento)
@@ -241,6 +248,7 @@ function disableSomeCSSFeatures(boton){
     boton.style.background = '#112f58'
     boton.style.cursor="not-allowed"
     boton.style.boxShadow="none"
+    boton.disabled=true
 }
 
 function aleatorio(min,max){ /* Numero random con rangos */
