@@ -26,6 +26,7 @@ img {                       /* ajustar imagenes a su contenedor */
 
 body {
     background: linear-gradient(70deg, var(--strong-blue), var(--light-blue));      /* fondo con gradiente */
+    background-attachment: fixed;
     height: 100vh;
     width: 100vw;               /* SUPER IMPORTANTE ESPECFICAR HEIGHT Y WIDTH */
     margin: 0;
