@@ -215,6 +215,32 @@ body {
 
 #arrow-buttons button{
     box-shadow: 0px 20px 28px -6px rgba(35, 40, 48, 0.33);
+    padding: 8px;
+    height: 20vw;
+    width: 20vw;
+    max-width: 66px;
+    max-height: 66px;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+}
+
+.flecha-arriba{grid-area: arriba;}
+.flecha-abajo{grid-area: abajo;}
+.flecha-derecha{grid-area: derecha;}
+.flecha-izquierda{grid-area: izquierda;}
+.flecha-vacio-1{grid-area:vacio1;}
+.flecha-vacio-2{grid-area:vacio2;}
+.flecha-vacio-3{grid-area:vacio3;}
+.flecha-vacio-4{grid-area:vacio4;}
+.flecha-vacio-5{grid-area:vacio5;}
+
+#arrow-buttons {
+    display: grid;
+    grid-template-areas: 
+        "vacio1 arriba vacio2"
+        "izquierda abajo derecha";
+    grid-gap: 8px;
 }
 
 @media (max-width:360px) {
@@ -258,6 +284,13 @@ body {
 
     #ver-mapa {
         height: 100%;
+    }
+
+    #arrow-buttons {
+        grid-template-areas: 
+            "vacio1 arriba vacio2"
+            "izquierda vacio3 derecha"
+            "vacio4 abajo vacio5";
     }
 
     #gameplay {
