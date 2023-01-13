@@ -203,6 +203,7 @@ body {
 
 #ver-mapa h2{
     margin: 20px;
+    text-align: center;
 }
 
 #mapa, #arrow-buttons button{
