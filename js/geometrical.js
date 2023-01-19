@@ -172,6 +172,18 @@ function startGame(){   /* Detectar mascota del jugador */
     sectionGameplay.style.display= "none"   /* Ocultar boton de reinicio */
     buttonPickCh.addEventListener("click", pickChPlayer)
     reset.addEventListener("click",restartGame)
+    unirseAlJuego()
+}
+
+function unirseAlJuego(){
+    fetch("http://localhost:8080/unirse")
+        .then (function (res) {
+            console.log(res)
+            if (res.ok){
+                res.text()
+                    .then (function (respuesta) {console.log(respuesta)})
+            }
+        })
 }
 
 function pickChPlayer() {   /* Detectar mascota del jugador */
