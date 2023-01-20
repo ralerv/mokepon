@@ -9,6 +9,15 @@ class Jugador {
     constructor(id){
         this.id = id
     }
+    asignarMokepon(mokepon){
+        this.mokepon = mokepon
+    }
+}
+
+class Mokepon {
+    constructor(nombre){
+        this.nombre = nombre
+    }
 }
 
 let jugadores = []
@@ -19,6 +28,17 @@ app.get("/unirse",(req,res)=>{
     jugadores.push(jugador)
     res.setHeader("Access-Control-Allow-Origin","*")
     res.send(id)
+})
+
+app.post("/mokepon/:jugadorID",(req,res)=>{
+    const jugadorID = req.params.jugadorID || ""
+    const nombre = req.body.mokepon || ""
+    const mokepon = new Mokepon(nombre)
+    const jugadorIndex = jugadores.findIndex((jugador)=>jugadorID === jugador.id)
+    if (jugadorIndex >= 0) {jugadores[jugadorIndex].asignarMokepon(mokepon)}
+    console.log(jugadores)
+    console.log(jugadorID)
+    res.end()
 })
 
 app.listen(8080, () => {

@@ -53,6 +53,7 @@ let fotousuario
 let lienzo = mapa.getContext("2d")
 let intervalo
 let miMascota
+let jugadorID = null
 let mapaBackground = new Image()
 mapaBackground.src="https://raw.githubusercontent.com/platzi/curso-programacion-basica/64-imgs-personajes-fondo/programar/mokepon/assets/mokemap.png"
 
@@ -181,7 +182,10 @@ function unirseAlJuego(){
             console.log(res)
             if (res.ok){
                 res.text()
-                    .then (function (respuesta) {console.log(respuesta)})
+                    .then (function (respuesta) {
+                        console.log(respuesta)
+                        jugadorID = respuesta
+                    })
             }
         })
 }
@@ -194,7 +198,16 @@ function pickChPlayer() {   /* Detectar mascota del jugador */
     extraerAtaques(pj)
     iniciarMapa()
     miMascota = obtenerMascota(pj)
+    pickMokepon(pj)
     }
+
+function pickMokepon(pj){
+    fetch(`http://localhost:8080/mokepon/${jugadorID}`,{
+        method : "post",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({mokepon: pj})
+    }) 
+}
 
 function obtenerMascota(mascotaJugador) {
     for (let i = 0; i < mokepones.length; i++) {
