@@ -163,7 +163,8 @@ function pickChPlayer() {   /* Detectar mascota del jugador */
     if (inputHipodoge.checked){fotousuario = hipodoge.foto; pj = inputHipodoge.id; chrc.innerHTML=inputHipodoge.id; pickChEnemy()} /* La mascota del enemigo se escogerá */
     if (inputCapipepo.checked){fotousuario = capipepo.foto; pj = inputCapipepo.id; chrc.innerHTML=inputCapipepo.id; pickChEnemy()}
     if (inputRatigueya.checked){fotousuario = ratigueya.foto; pj = inputRatigueya.id; chrc.innerHTML=inputRatigueya.id; pickChEnemy()}
-    if (!inputHipodoge.checked && !inputCapipepo.checked && !inputRatigueya.checked ) {alert("ESCOGE UN PERSONAJE")}
+    else {alert("ESCOGE UN PERSONAJE");return}
+    pickChEnemy()
     extraerAtaques(pj)
     iniciarMapa()
     miMascota = obtenerMascota(pj)

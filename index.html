@@ -22,10 +22,30 @@
             <h2 class="titulo">Recorre el mapa con tu Mokepon</h2>
             <canvas id="mapa"></canvas>
             <section id="arrow-buttons">
-                <button class="flecha-arriba" onmouseup="detenerMovimiento()" onmousedown="moverArriba()">↑</button>
-                <button class="flecha-izquierda" onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">←</button>
-                <button class="flecha-abajo" onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">↓</button>
-                <button class="flecha-derecha" onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">→</button>
+                <button class="flecha-arriba" 
+                    onmouseup="detenerMovimiento()" 
+                    ontouchend="detenerMovimiento()" 
+                    onmousedown="moverArriba()"
+                    ontouchstart="moverArriba()"
+                    >↑</button>
+                <button class="flecha-izquierda" 
+                    onmouseup="detenerMovimiento()"
+                    ontouchend="detenerMovimiento()" 
+                    onmousedown="moverIzquierda()"
+                    ontouchstart="moverIzquierda()"
+                    >←</button>
+                <button class="flecha-abajo"
+                    onmouseup="detenerMovimiento()"
+                    ontouchend="detenerMovimiento()" 
+                    onmousedown="moverAbajo()"
+                    ontouchstart="moverAbajo()"
+                    >↓</button>
+                <button class="flecha-derecha"  
+                    onmouseup="detenerMovimiento()"
+                    ontouchend="detenerMovimiento()" 
+                    onmousedown="moverDerecha()"
+                    ontouchstart="moverDerecha()"
+                    >→</button>
             </section>
         </section>
     
